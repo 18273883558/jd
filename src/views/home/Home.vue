@@ -15,15 +15,15 @@ import Docker from './Docker.vue'
 export default {
     name:'Home',
     components:{
-        StaticPart,
-        Nearby,
-        Docker
+      StaticPart,
+      Nearby,
+      Docker
     }
 }
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrapper{
   overflow: auto;
   position: absolute;

@@ -1,6 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter,  createWebHistory,} from 'vue-router'
 import Home from '../views/home/Home.vue'
 import Login from '../views/login/Login.vue'
+import Register from '../views/register/Register.vue'
 
 const routes = [
   {
@@ -9,9 +10,18 @@ const routes = [
     component: Home
   },
   {
+    path:'/register',
+    name:'Register',
+    component:Register
+  },
+  {
     path:'/login',
     name:"Login",
-    component:Login
+    component:Login,
+    beforeEnter(to,from,next){
+      const isLogin=localStorage.isLogin
+      isLogin ? next({name:'Home'}) : next()
+    }
   }
   // {
   //   path: '/about',
@@ -24,8 +34,17 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+// 路由每次跳转之前调用方法
+router.beforeEach((to,from,next)=>{
+  const isLogin=localStorage.isLogin; //等价于const {isLogin}=localStorage;
+  const {name} =to;
+  const isLoginOrRegister = (name==="Login") || name==="Register";
+  (isLogin || isLoginOrRegister) ? next() : next({name:'Login'})
+    // 如果是登录状态或即将跳转的页面为Login页面
 })
 
 export default router

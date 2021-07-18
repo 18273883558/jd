@@ -1,23 +1,23 @@
 <template>
-    <div class="position">
-        <span class="iconfont position_icon">&#xe648;</span>
-        北京理工大学国防科技园2号楼10层
-        <span class="iconfont position_notice">&#xe60a;</span>
-      </div>
-      <div class="search">
-        <span class="iconfont">&#xe677;</span>
-        <span class="search_text">山姆会员商店优惠商品</span>
-      </div>
-      <div class="banner">
-        <img class="banner_img" src="http://www.dell-lee.com/imgs/vue3/banner.jpg" alt="">
-      </div>
-      <div class="icons">
-        <div class="icons_item" v-for="(item,index) in iconList" :key="index">
-          <img :src="'http://www.dell-lee.com/imgs/vue3/'+item.imgName+'.png'" alt="" class="icons_item_img">
-          <p class="icons_item_desc">{{item.desc}}</p>
-        </div>
-      </div>
-      <div class="gap"></div>
+  <div class="position">
+    <span class="iconfont position_icon">&#xe648;</span>
+    北京理工大学国防科技园2号楼10层
+    <span class="iconfont position_notice">&#xe60a;</span>
+  </div>
+  <div class="search">
+    <span class="iconfont">&#xe677;</span>
+    <span class="search_text">山姆会员商店优惠商品</span>
+  </div>
+  <div class="banner">
+    <img class="banner_img" src="http://www.dell-lee.com/imgs/vue3/banner.jpg" alt="">
+  </div>
+  <div class="icons">
+    <div class="icons_item" v-for="(item,index) in iconList" :key="index">
+      <img :src="'http://www.dell-lee.com/imgs/vue3/'+item.imgName+'.png'" alt="" class="icons_item_img">
+      <p class="icons_item_desc">{{item.desc}}</p>
+    </div>
+  </div>
+  <div class="gap"></div>
 </template>
 
 <script>
