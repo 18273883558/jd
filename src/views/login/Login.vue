@@ -57,18 +57,6 @@ const useLoginEffect=(showToast)=>{
           }
         }
       }
-    //     const result=await post('/api/user/login',{
-    //     username:data.username,
-    //     password:data.password
-    //   })
-    //   console.log(result)
-    //   if(result.errno===0){
-    //     localStorage.isLogin=true
-    //     router.push({name:'Home'})
-    //   }else{
-    //     showToast('登录失败')
-    //   }
-    // }
     catch(e){
       showToast('请求失败')
     }      
@@ -93,7 +81,6 @@ export default {
       Toast
   },
   setup(){
-    // useRouter方法获取到路由实例
     const { show,toastMessage,showToast }=useToastEffect()
     const { username,password,handleLogin }=useLoginEffect(showToast)  
     const { handleRegisterClick }=useRegisterEffect()

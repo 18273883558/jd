@@ -65,7 +65,7 @@ const useRegisterEffect=(showToast)=>{
     }      
   }
   const {username,password,ensurement}=toRefs(data)
-  // 想当于另username=data.username,password=data.password
+  // 想当于令username=data.username,password=data.password
   return{username,password,ensurement,handleRegister}
 }
 
