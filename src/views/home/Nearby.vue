@@ -1,18 +1,16 @@
 <template>
 <div class="nearby">
   <h3 class="nearby_title">附件店铺</h3>
-  <shop-info 
-    v-for="item in nearbyList" 
-    :key="item._id"
-    :item=item 
-  />
+  <router-link :to='"/shop/"+item._id' v-for="item in nearbyList" :key="item._id">
+    <shop-info :item=item />
+  </router-link>
 </div>
 </template>
 
 <script>
 import {ref} from 'vue'
 import {get} from '../../utils/request.js'
-import ShopInfo from '../../components/ShopInfo.vue'
+import ShopInfo from '@/components/ShopInfo.vue'
 
 const useNearbyListEffect=()=>{
   // ref创建响应式数据，数据变化，页面跟着变化
@@ -22,7 +20,7 @@ const useNearbyListEffect=()=>{
     if(result?.errno===0 && result?.data?.length){
       nearbyList.value=result.data
     }
-    console.log(result.data)
+    // console.log(result.data)
   }
   return{nearbyList,getNearbyList}
 }
@@ -46,8 +44,11 @@ export default{
   &_title{
     margin: .16rem 0 .02rem 0;
     font-size: .18rem;
-    color: $content-fontcolor;
+    color: $content-fontColor;
     font-weight: normal;
+  }
+  a{
+    text-decoration: none;
   }
 }
 </style>

@@ -71,7 +71,7 @@ const useRegisterEffect=(showToast)=>{
 
 // 跳转登录页面
 const useLoginEffect=()=>{
-  // useRouter方法获取到路由实例
+  // useRouter方法获取到全局路由实例
   const router=useRouter()
   const handleLoginClick=()=>{
     router.push({name:'Login'})
@@ -123,26 +123,26 @@ export default {
         width: 100%;
         background: none;
         font-size: .16rem;
-        color: $content-notice-fontcolor;
+        color: $content-notice-fontColor;
         &::placeholder{
-            color: $content-notice-fontcolor;
+            color: $content-notice-fontColor;
         }
     }
   }
   &_register-button{
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
-    background: #0091ff;
+    background: $btn-bgColor;
     box-shadow: 0 .04rem .08rem 0 rgba(0,145,225,0.32);
     border-radius: .04rem;
     border-radius: .04rem;
-    color: #fff;
+    color: $bgColor;
     font-size: .16rem;
     text-align: center;
   }
   &_register-link{
     font-size: .14rem;
-    color: $content-notice-fontcolor;
+    color: $content-notice-fontColor;
     text-align: center;
 
   }

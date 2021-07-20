@@ -39,8 +39,8 @@ export default {
   bottom: 0;
   width: 100%;
   height: 0.49rem;
-  border-top: 1px solid $content-bgcolor;
-  color: $content-fontcolor;
+  border-top: 1px solid $content-bgColor;
+  color: $content-fontColor;
 }
 .docker_item{
   flex: 1;

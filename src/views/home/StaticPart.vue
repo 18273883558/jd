@@ -65,13 +65,13 @@ export default {
     top: .17rem;
     font-size: .2rem;
   }
-  color:$content-fontcolor;
+  color:$content-fontColor;
 }
 .search{
   margin-bottom: .12rem;
   line-height: .32rem;
-  background: #f5f5f5;
-  color: #b7b7b7;
+  background: $search-bgColor;
+  color: $search-fontColor;
   border-radius: .16rem;
   font-size: .14re;
   .iconfont{
@@ -110,13 +110,13 @@ export default {
     &_desc{
       margin: .06rem 0 .16rem 0;
       text-align: center;
-      color: $content-fontcolor;
+      color: $content-fontColor;
     }
   }
 }
 .gap{
   margin:0 -.18rem;
   height: .1rem;
-  background: $content-bgcolor
+  background: $content-bgColor
 }
 </style>
