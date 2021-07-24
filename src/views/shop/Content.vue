@@ -16,7 +16,7 @@
         v-for="(item,index) in list"
         :key={index}
       >
-        <img class="product_item_img" src="http://www.dell-lee.com/imgs/vue3/near.png" alt="">
+        <img class="product_item_img" :src="item.imgUrl" alt="">
         <div class="product_item_detail">
           <h4 class="product_item_title">{{item.name}}</h4>
           <p class="product_item_sales">月售{{item.sales}}件</p>

@@ -17,6 +17,7 @@
   </div>
   <shop-info :item="item" :hideBorder="true" v-show="item.imgUrl"/>
   <Content />
+  <Cart/>
 </div>
 </template>
  
@@ -26,6 +27,7 @@ import {get} from '../../utils/request.js'
 import {reactive,toRefs} from 'vue'
 import ShopInfo from '@/components/ShopInfo.vue'
 import Content from './Content.vue'
+import Cart from './Cart.vue'
 
 const useShopInfoEffect=()=>{
   // $route对象表示当前的路由信息，包含了当前 URL 解析得到的信息。包含当前的路径，参数
@@ -59,7 +61,8 @@ export default {
   name:'Shop',
   components:{
     ShopInfo,
-    Content
+    Content,
+    Cart
   },
   setup(){
     const {item,getItemData}=useShopInfoEffect()
