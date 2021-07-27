@@ -26,9 +26,19 @@
           </p>
         </div>
         <div class="product_number">
-          <span class="product_number_minus">-</span>
-          0
-          <span class="product_number_plus">+</span>
+          <span 
+            class="product_number_minus"
+            @click="()=>{changeCartInfo(shopId,item._id,item,-1)}"
+          >
+            -
+          </span>
+          {{cartList?.[shopId]?.[item._id]?.count || 0}}
+          <span 
+            class="product_number_plus"
+            @click="()=>{changeCartInfo(shopId,item._id,item,1)}"
+          >
+            +
+          </span>
         </div>
       </div> 
     </div>    
@@ -39,6 +49,7 @@
 import {reactive,toRefs,ref,watchEffect} from 'vue'
 import {useRoute} from 'vue-router'
 import {get} from '../../utils/request'
+import {useStore} from 'vuex'
 
 const categories=[
   {name:'全部商品',tab:'all'},
@@ -54,9 +65,8 @@ const useTabEffect=()=>{
   return {currentTab,handleTabClick}
 }
 
-const useCurrentListEffect=(currentTab)=>{
-  const route=useRoute()
-  const shopId=route.params.id
+// 列表相关逻辑
+const useCurrentListEffect=(currentTab,shopId)=>{
   const content=reactive({
     list:[]
   })
@@ -66,24 +76,40 @@ const useCurrentListEffect=(currentTab)=>{
     if(result.errno===0 && result.data.length){
      content.list=result.data
     }
-    console.log(result) 
+    // console.log(result) 
   }
 
   // watchEffect()方法接收一个函数对象作为参数，它会立即运行该函数，同时响应式地跟踪其依赖项，并在依赖项发生改变时重新运行该函数
-  watchEffect(()=>{
-    getContentData()
-  })
-
+  watchEffect(()=>{getContentData()})
   const {list}=toRefs(content)
   return {list}
-}  
+}
+
+// 购物车相关逻辑
+const useCartEffect=()=>{
+  const store=useStore()
+  const {cartList}=toRefs(store.state)
+  const changeCartInfo=(shopId,productId,productInfo,num)=>{
+    store.commit('changeCartInfo',{
+      shopId,productId,productInfo,num
+    })
+    // console.log(shopId,productId,productInfo)
+  }
+  return {cartList,changeCartInfo}
+}
 
 export default {
   name:'Content',
   setup(){
+    const route=useRoute()
+    const shopId=route.params.id
     const {currentTab,handleTabClick}=useTabEffect()
-    const {list}=useCurrentListEffect(currentTab)
-    return {categories,currentTab,handleTabClick,list}
+    const {list}=useCurrentListEffect(currentTab,shopId)
+    const {cartList,changeCartInfo}=useCartEffect()
+    return {
+      categories,currentTab,handleTabClick,list,
+      cartList,shopId,changeCartInfo
+    }
   }
 }
 </script>
