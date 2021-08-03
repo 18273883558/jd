@@ -28,14 +28,14 @@
         <div class="product_number">
           <span 
             class="product_number_minus"
-            @click="()=>{changeCartInfo(shopId,item._id,item,-1)}"
+            @click="()=>{changeCartItem(shopId,item._id,item,-1,shopName)}"
           >
             -
           </span>
-          {{cartList?.[shopId]?.[item._id]?.count || 0}}
+            {{cartList?.[shopId]?.productList?.[item._id]?.count || 0}}
           <span 
             class="product_number_plus"
-            @click="()=>{changeCartInfo(shopId,item._id,item,1)}"
+            @click="()=>{changeCartItem(shopId,item._id,item,1,shopName)}"
           >
             +
           </span>
@@ -48,8 +48,9 @@
 <script>
 import {reactive,toRefs,ref,watchEffect} from 'vue'
 import {useRoute} from 'vue-router'
-import {get} from '../../utils/request'
 import {useStore} from 'vuex'
+import {get} from '../../utils/request'
+import {useCommonCartEffect} from './commonCartEffect.js'
 
 const categories=[
   {name:'全部商品',tab:'all'},
@@ -57,6 +58,7 @@ const categories=[
   { name:'新鲜水果',tab:'fruit'}
 ]
 
+// 导航栏高亮逻辑
 const useTabEffect=()=>{
   const currentTab=ref(categories[0].tab)
   const handleTabClick=(tab)=>{
@@ -85,30 +87,30 @@ const useCurrentListEffect=(currentTab,shopId)=>{
   return {list}
 }
 
-// 购物车相关逻辑
-const useCartEffect=()=>{
-  const store=useStore()
-  const {cartList}=toRefs(store.state)
-  const changeCartInfo=(shopId,productId,productInfo,num)=>{
-    store.commit('changeCartInfo',{
-      shopId,productId,productInfo,num
-    })
-    // console.log(shopId,productId,productInfo)
-  }
-  return {cartList,changeCartInfo}
-}
+
 
 export default {
   name:'Content',
+  props:['shopName'],
   setup(){
     const route=useRoute()
+    const store=useStore()
     const shopId=route.params.id
     const {currentTab,handleTabClick}=useTabEffect()
     const {list}=useCurrentListEffect(currentTab,shopId)
-    const {cartList,changeCartInfo}=useCartEffect()
+    const {changeCartItemInfo,cartList}=useCommonCartEffect()
+    const changeShopName=(shopId,shopName)=>{
+      store.commit('changeShopName',{
+        shopId,shopName
+      })
+    }
+    const changeCartItem=(shopId,product,item,num,shopName)=>{
+      changeCartItemInfo(shopId,product,item,num)
+      changeShopName(shopId,shopName)
+    }
     return {
       categories,currentTab,handleTabClick,list,
-      cartList,shopId,changeCartInfo
+      shopId,changeCartItem,cartList
     }
   }
 }
