@@ -5,9 +5,11 @@
       :class="{'docker_item':true,'docker_item--active':index===0}" 
       class="docker_item"
       :key="item.icon"
-    >
-      <div class="iconfont" v-html="item.icon"></div>
-      <div class="docker_title">{{item.text}}</div>
+    > 
+      <router-link :to="item.to">
+        <div class="iconfont" v-html="item.icon"></div>
+        <div class="docker_title">{{item.text}}</div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -18,10 +20,10 @@ export default {
     // setup()函数返回一个对象，该对象的属性可以在模板中使用
     setup(){
       const dockerList=[
-          {icon:'&#xe719;',text:'首页'},
-          {icon:'&#xe603;',text:'购物车'},
-          {icon:'&#xe61e;',text:'订单'},
-          {icon:'&#xe610;',text:'我的'}
+          {icon:'&#xe719;',text:'首页',to:{name:'Home'}},
+          {icon:'&#xe603;',text:'购物车',to:{name:'CartList'}},
+          {icon:'&#xe61e;',text:'订单',to:{name:'Home'}},
+          {icon:'&#xe610;',text:'我的',to:{name:'Home'}}
       ]
       return{dockerList}   
     }
@@ -40,18 +42,23 @@ export default {
   width: 100%;
   height: 0.49rem;
   border-top: 1px solid $content-bgColor;
-  color: $content-fontColor;
 }
 .docker_item{
   flex: 1;
   text-align: center;
+  a{
+    color: $content-fontColor;
+    text-decoration: none;
+  }
   .iconfont{
     font-size: .18rem;
     margin: .07rem 0 .02rem 0;
   }
 }
 .docker_item--active{
-  color: #1FA4FC;
+  a{
+    color: #1FA4FC;
+  }
 }
 
 .docker_title{

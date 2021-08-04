@@ -1,8 +1,19 @@
 import { createStore } from 'vuex'
 
+// 缓存购物车
+const setLocalCartList=(state)=>{
+  const {cartList}=state
+  const cartListString=JSON.stringify(cartList)
+  localStorage.cartList=cartListString
+}
+
+const getLocalCartList=()=>{
+  return JSON.parse(localStorage.cartList || {})
+}
+
 export default createStore({
   state: {
-    cartList:{
+    // cartList:{
     //   第一层级是商铺id
       // shopId:{
     //     shopName:'沃尔玛'
@@ -12,7 +23,8 @@ export default createStore({
               // }
     //     }
     //   },
-    }
+    // }
+    cartList:getLocalCartList()
   },
   mutations: {
     // 商品数量更改逻辑
@@ -31,7 +43,8 @@ export default createStore({
       if(product.count<0){product.count=0}
       shopInfo.productList[productId]=product
       state.cartList[shopId]=shopInfo
-      console.log(state.cartList)
+      // console.log(state.cartList)
+      setLocalCartList(state) 
     },
 
     changeShopName(state,payload){
@@ -41,6 +54,7 @@ export default createStore({
       }
       shopInfo.shopName=shopName
       state.cartList[shopId]=shopInfo
+      setLocalCartList(state) 
     },
 
     // 更改购物车中商品选中状态
@@ -48,11 +62,13 @@ export default createStore({
       const {shopId,productId}=payload
       const product=state.cartList[shopId].productList[productId]
       product.check=!product.check
+      setLocalCartList(state) 
     },
     // 清空购物车
     cleanCartProducts(state,payload){
       const {shopId}=payload
       state.cartList[shopId].productList={}
+      setLocalCartList(state) 
     },
 
     // 点击全选
@@ -65,6 +81,7 @@ export default createStore({
           product.check=true
         }
       }
+      setLocalCartList(state) 
     }
   },
   actions: {
