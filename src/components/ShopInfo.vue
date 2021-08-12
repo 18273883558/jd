@@ -43,7 +43,7 @@ export default {
     flex: 1;  //让所有弹性盒模型对象的子元素都有相同的长度，且忽略它们内部的内容
     padding-bottom: .12rem;
     &--bordered{
-      border-bottom: 1px solid $content-bgColor;
+      border-bottom: .01rem solid $content-bgColor;
     }
     &_title{
       line-height: .22rem;

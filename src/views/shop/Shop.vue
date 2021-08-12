@@ -44,6 +44,7 @@ const useShopInfoEffect=()=>{
       // console.log(result)
     }
     const {item} =toRefs(data)  //令item=data.item
+    // console.log(item)
     return{item,getItemData}
 }
 

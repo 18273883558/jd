@@ -13,8 +13,8 @@
     <div class="product">
       <div 
         class="product_item" 
-        v-for="(item,index) in list"
-        :key={index}
+        v-for="item in list"
+        :key=item._id
       >
         <img class="product_item_img" :src="item.imgUrl" alt="">
         <div class="product_item_detail">
@@ -27,17 +27,17 @@
         </div>
         <div class="product_number">
           <span 
-            class="product_number_minus"
+            class="product_number_minus iconfont"
             @click="()=>{changeCartItem(shopId,item._id,item,-1,shopName)}"
           >
-            -
+            &#xe701;
           </span>
             {{getProductCartCount(shopId,item._id)}}
           <span 
-            class="product_number_plus"
+            class="product_number_plus iconfont"
             @click="()=>{changeCartItem(shopId,item._id,item,1,shopName)}"
           >
-            +
+            &#xe667;
           </span>
         </div>
       </div> 
@@ -50,7 +50,7 @@ import {reactive,toRefs,ref,watchEffect} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from 'vuex'
 import {get} from '../../utils/request'
-import {useCommonCartEffect} from './commonCartEffect.js'
+import {useCommonCartEffect} from '../../effects/cartEffects'
 
 const categories=[
   {name:'全部商品',tab:'all'},
@@ -200,24 +200,15 @@ export default {
       position:absolute;
       right: 0;
       bottom: .12rem;
-      &_minus,&_plus{
-        display: inline-block;
-        width: .2rem;
-        height: .2rem;
-        line-height: .16rem;
-        border-radius: 50%;
-        border: .01rem solid $medium-fontColor;
-        font-size: .2rem;
-        text-align: center;
-      }
+      line-height: .18rem;
       &_minus{
-        border: .01rem solid $medium-fontColor;
+        position: relative;
+        top: .01rem;
         color: $medium-fontColor;
         margin-right: .05rem;
       }
       &_plus{
-        background: $btn-bgColor;
-        color: $bgColor;
+        color: $btn-bgColor;
         margin-left: .05rem;
       }    
     }

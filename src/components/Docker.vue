@@ -2,7 +2,7 @@
   <div class="docker">
     <div 
       v-for="(item,index) in dockerList"
-      :class="{'docker_item':true,'docker_item--active':index===0}" 
+      :class="{'docker_item':true,'docker_item--active':index===currentIndex}" 
       class="docker_item"
       :key="item.icon"
     > 
@@ -17,12 +17,13 @@
 <script>
 export default {
     name:'Docker',
+    props:['currentIndex'],
     // setup()函数返回一个对象，该对象的属性可以在模板中使用
     setup(){
       const dockerList=[
           {icon:'&#xe719;',text:'首页',to:{name:'Home'}},
           {icon:'&#xe603;',text:'购物车',to:{name:'CartList'}},
-          {icon:'&#xe61e;',text:'订单',to:{name:'Home'}},
+          {icon:'&#xe61e;',text:'订单',to:{name:'OrderList'}},
           {icon:'&#xe610;',text:'我的',to:{name:'Home'}}
       ]
       return{dockerList}   
@@ -31,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/virables.scss';
+@import '../style/virables.scss';
 .docker{
   display: flex;
   position: absolute;
@@ -41,7 +42,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 0.49rem;
-  border-top: 1px solid $content-bgColor;
+  border-top: .01rem solid $content-bgColor;
 }
 .docker_item{
   flex: 1;

@@ -22,6 +22,7 @@ const useNearbyListEffect=()=>{
     }
     // console.log(result.data)
   }
+  // console.log(nearbyList)
   return{nearbyList,getNearbyList}
 }
 
