@@ -22,9 +22,9 @@ export default {
     setup(){
       const dockerList=[
           {icon:'&#xe719;',text:'首页',to:{name:'Home'}},
-          {icon:'&#xe603;',text:'购物车',to:{name:'CartList'}},
+          // {icon:'&#xe603;',text:'购物车',to:{name:'CartList'}},
           {icon:'&#xe61e;',text:'订单',to:{name:'OrderList'}},
-          {icon:'&#xe610;',text:'我的',to:{name:'Home'}}
+          // {icon:'&#xe610;',text:'我的',to:{name:'Home'}}
       ]
       return{dockerList}   
     }
